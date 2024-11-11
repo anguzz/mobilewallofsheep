@@ -1,5 +1,5 @@
 # mobilewallofsheep
-mobile wall of sheep for ossCON 2024
+
 ****![qr-code](https://github.com/user-attachments/assets/a673f62c-44b3-4206-9412-b88c8cc62b1b)
 
 Mobile Wall of Sheep for OSSCON 2024
