@@ -29,7 +29,7 @@
             maxTouchPoints: navigator.maxTouchPoints,
             cookieEnabled: navigator.cookieEnabled,
             javaEnabled: navigator.javaEnabled ? navigator.javaEnabled() : false,
-            doNotTrack: navigator.doNotTrack,
+            doNotTrack: navigator.doNotTrack || 'Unknown',
             timestamp: serverTimestamp(),
         };
   
@@ -57,11 +57,19 @@
     });
   
     function saveDeviceInfo(info) {
-        const devicesCollection = collection(db, "Devices");
-        addDoc(devicesCollection, info)
-            .then(docRef => console.log("Document written with ID: ", docRef.id))
-            .catch(error => console.error("Error adding document: ", error));
-    }
+    // have to replace undefined values with 'N/A' or similar placeholder 
+    Object.keys(info).forEach(key => {
+        if (info[key] === undefined) {
+            info[key] = 'N/A'; 
+        }
+    });
+
+    const devicesCollection = collection(db, "Devices");
+    addDoc(devicesCollection, info)
+        .then(docRef => console.log("Document written with ID: ", docRef.id))
+        .catch(error => console.error("Error adding document: ", error));
+}
+
   
     function formatTimestamp(timestamp) {
         if (timestamp && timestamp.toDate) {
